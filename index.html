@@ -63,6 +63,7 @@
         /* Header */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--border-color); }
         .logo { font-size: 22px; font-weight: 800; color: var(--text-primary); }
+        .visit-counter { position: fixed; left: 16px; bottom: 16px; z-index: 10; font-size: 13px; color: var(--text-secondary); font-weight: 500; opacity: 0.75; white-space: nowrap; pointer-events: none; }
 
         /* Hero Section */
         .hero { text-align: center; padding: 80px 0 50px; }
@@ -212,6 +213,8 @@
         </section>
     </div>
 
+    <span id="visit-counter" class="visit-counter" hidden>👁 <span id="visit-count"></span></span>
+
     <!-- Contact Modal -->
     <div id="contactModal" class="modal-overlay">
         <div class="modal-card">
@@ -241,6 +244,28 @@
     <script>
         function openModal() { document.getElementById('contactModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('contactModal').style.display = 'none'; }
+
+        (function () {
+            var counterEl = document.getElementById('visit-counter');
+            var countEl = document.getElementById('visit-count');
+            var storageKey = 'nadoo-automation-visits-day';
+            var now = new Date();
+            var today = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+            var alreadyHit = false;
+            try { alreadyHit = localStorage.getItem(storageKey) === today; } catch (e) {}
+            var endpoint = alreadyHit ? '/get/' : '/hit/';
+            fetch('https://abacus.jasoncameron.dev' + endpoint + 'nadoo-automation/visits')
+                .then(function (res) { if (!res.ok) throw new Error(); return res.json(); })
+                .then(function (data) {
+                    if (typeof data.value !== 'number') throw new Error();
+                    if (!alreadyHit) {
+                        try { localStorage.setItem(storageKey, today); } catch (e) {}
+                    }
+                    countEl.textContent = data.value.toLocaleString();
+                    counterEl.hidden = false;
+                })
+                .catch(function () { counterEl.hidden = true; });
+        })();
     </script>
 </body>
 </html>
