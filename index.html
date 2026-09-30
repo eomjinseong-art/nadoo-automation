@@ -112,6 +112,14 @@
             .hero h1 { font-size: 32px; }
             .metrics, .grid-2 { grid-template-columns: 1fr; }
         }
+        /* Coupang Partners footer banner (광고) */
+        .cpb { max-width: 720px; margin: 48px auto 24px; padding: 0; text-align: left; }
+        .cpb-link { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--surface-color); color: var(--text-secondary); font-size: 14px; line-height: 1.5; text-decoration: none; word-break: keep-all; transition: border-color .15s ease, color .15s ease; }
+        .cpb-link:hover, .cpb-link:focus-visible { border-color: var(--primary-color); color: var(--primary-hover); text-decoration: none; }
+        .cpb-label { flex-shrink: 0; padding: 1px 6px; border: 1px solid var(--border-color); border-radius: 4px; color: #94a3b8; font-size: 11px; line-height: 1.5; }
+        .cpb-copy { flex: 1; min-width: 0; }
+        .cpb-arrow { flex-shrink: 0; color: var(--primary-color); }
+        .cpb-note { margin: 8px 0 0; color: #94a3b8; font-size: 11px; line-height: 1.6; text-align: left; word-break: keep-all; }
     </style>
 </head>
 <body>
@@ -211,6 +219,14 @@
                 <p>수십 개의 전문가 강의 영상이나 인터뷰 오디오에서 핵심만 정제하여 마크다운 목차(`# 장 제목`, `> 요약`)가 적용된 전자책 원고로 원클릭 저장합니다.</p>
             </div>
         </section>
+        <aside class="cpb" aria-label="광고">
+          <a class="cpb-link" href="https://link.coupang.com/a/hsdzLh1vB6" target="_blank" rel="sponsored noopener noreferrer nofollow">
+            <span class="cpb-label">광고</span>
+            <span class="cpb-copy">반복 작업은 자동화에 맡기고, 반복 구매는 쿠팡에 맡겨 보세요</span>
+            <span class="cpb-arrow" aria-hidden="true">→</span>
+          </a>
+          <p class="cpb-note">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+        </aside>
     </div>
 
     <span id="visit-counter" class="visit-counter" hidden>👁 <span id="visit-count"></span></span>
